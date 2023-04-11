@@ -7,10 +7,30 @@ import { Component, h, State } from '@stencil/core';
 })
 export class Form {
   @State() loopwire = [{ loopName: '', loopmeter: '', GPS: '' }];
+  @State() fiberLinkName: string;
+  @State() fiberModel: string;
+  @State() Cores: string;
 
   handleSubmit = e => {
     e.preventDefault();
-    // console.log(this.loopwire);
+    console.log('FiberLinkName:', this.fiberLinkName);
+    console.log('FiberModel:', this.fiberModel);
+    console.log('Cores:', this.Cores);
+  };
+
+  //for setting FiberLinkName value to its state
+  handleFiberLinkName = event => {
+    this.fiberLinkName = event.target.value;
+  };
+
+  //for setting FiberMode value to its state
+  handleFiberModel = event => {
+    this.fiberModel = event.target.value;
+  };
+
+  //for setting Cores value to its state
+  handleCores = event => {
+    this.Cores = event.target.value;
   };
 
   // LoopName
@@ -18,6 +38,7 @@ export class Form {
     this.loopwire = [...this.loopwire, { loopName: '', loopmeter: '', GPS: '' }];
   }
 
+  // Remove LoopName
   removeLoopwire(index) {
     const rows = [...this.loopwire];
     rows.splice(index, 1);
@@ -39,7 +60,7 @@ export class Form {
           {/* FIBER LINK NAME  */}
           <div class="form-row">
             <div class="input-data">
-              <input type="text" required placeholder=" " />
+              <input type="text" required placeholder=" " onInput={this.handleFiberLinkName} />
               <div class="underline"></div>
               <label htmlfor="">
                 Fiber Link Name<span class="text-danger">*</span>
@@ -53,7 +74,7 @@ export class Form {
               <label htmlfor="">
                 Fiber Model<span class="text-danger">*</span> :
               </label>
-              <select required style={{ marginLeft: '120px', width: '63%' }}>
+              <select required style={{ marginLeft: '120px', width: '63%' }} onInput={this.handleFiberModel}>
                 <option value="">Select :</option>
                 <option value="Model 1">Model 1</option>
                 <option value="Model 2">Model 2</option>
@@ -66,7 +87,7 @@ export class Form {
               <label htmlfor="">
                 Cores<span class="text-danger">*</span> :
               </label>
-              <select required>
+              <select required onInput={this.handleCores}>
                 <option value="">Select :</option>
                 <option value="6">6</option>
                 <option value="12">12</option>
