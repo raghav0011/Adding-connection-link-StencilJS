@@ -10,12 +10,15 @@ export class Form {
   @State() fiberLinkName: string;
   @State() fiberModel: string;
   @State() Cores: string;
+  @State() LinkLocation = [{ from: '', to: '' }];
 
   handleSubmit = e => {
     e.preventDefault();
     console.log('FiberLinkName:', this.fiberLinkName);
     console.log('FiberModel:', this.fiberModel);
     console.log('Cores:', this.Cores);
+    // console.log(this.LinkLocation);
+    console.log(this.loopwire);
   };
 
   //for setting FiberLinkName value to its state
@@ -31,6 +34,11 @@ export class Form {
   //for setting Cores value to its state
   handleCores = event => {
     this.Cores = event.target.value;
+  };
+
+  // Link location
+  handleLinkLocation = e => {
+    this.LinkLocation = [...this.LinkLocation, { from: e.target.value, to: e.target.value }];
   };
 
   // LoopName
@@ -104,12 +112,12 @@ export class Form {
           <label class="section--label">Link Location:</label>
           <div class="form-row" style={{ marginTop: '10px' }}>
             <div class="input-data">
-              <input type="text" placeholder=" " />
+              <input type="text" placeholder=" " onInput={this.handleLinkLocation} name="from" />
               <div class="underline"></div>
               <label htmlfor="">From</label>
             </div>
             <div class="input-data">
-              <input type="text" placeholder=" " />
+              <input type="text" placeholder=" " onInput={this.handleLinkLocation} name="to" />
               <div class="underline"></div>
               <label htmlfor="">To</label>
             </div>
@@ -167,7 +175,7 @@ export class Form {
                 </div>
 
                 <div class="input-data">
-                  <input type="text" onChange={evnt => this.handleLoopwireChange(index, evnt)} name="loopmeter" value={loopmeter} placeholder=" " />
+                  <input type="number" onChange={evnt => this.handleLoopwireChange(index, evnt)} name="loopmeter" value={loopmeter} placeholder=" " />
                   <div class="underline"></div>
                   <label htmlfor="">Loop Meters</label>
                 </div>
