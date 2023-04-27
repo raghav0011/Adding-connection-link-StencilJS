@@ -1,44 +1,35 @@
 import { Component, h, State } from '@stencil/core';
+// const axios = require('axios').default;
 
 @Component({
-  tag: 'md-component',
+  tag: 'connection-link-component',
   styleUrl: 'styles.css',
   shadow: true,
 })
 export class Form {
   @State() loopwire = [{ loopName: '', loopmeter: '', GPS: '' }];
-  @State() fiberLinkName: string;
-  @State() fiberModel: string;
+  @State() LinkType: string;
+  @State() Olt: string;
   @State() Cores: string;
-  @State() LinkLocation = [{ from: '', to: '' }];
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('FiberLinkName:', this.fiberLinkName);
-    console.log('FiberModel:', this.fiberModel);
     console.log('Cores:', this.Cores);
-    // console.log(this.LinkLocation);
-    console.log(this.loopwire);
+    console.log('FiberLinkName:', this.LinkType, '-', this.Cores, '-', this.Olt);
   };
 
-  //for setting FiberLinkName value to its state
-  handleFiberLinkName = event => {
-    this.fiberLinkName = event.target.value;
+  // setting link type
+  handleLinkType = event => {
+    this.LinkType = event.target.value;
   };
 
-  //for setting FiberMode value to its state
-  handleFiberModel = event => {
-    this.fiberModel = event.target.value;
+  handleOlt = event => {
+    this.Olt = event.target.value;
   };
 
   //for setting Cores value to its state
   handleCores = event => {
     this.Cores = event.target.value;
-  };
-
-  // Link location
-  handleLinkLocation = e => {
-    this.LinkLocation = [...this.LinkLocation, { from: e.target.value, to: e.target.value }];
   };
 
   // LoopName
@@ -65,13 +56,56 @@ export class Form {
       <div class="container">
         <div class="text">ADD NEW CONNECTION LINK</div>
         <form action="#" onSubmit={e => this.handleSubmit(e)}>
+          {/* OLT and Link Type  */}
+
+          <div class="form-row" style={{ marginTop: '10px', marginBottom: '10px' }}>
+            <div class="input-data" style={{ marginRight: '60px' }}>
+              <label htmlfor="">
+                Link Type<span class="text-danger">*</span> :
+              </label>
+              <select required onInput={this.handleLinkType} style={{ marginLeft: '100px', width: '63%' }}>
+                <option value="">Select :</option>
+                <option value="F">Fiber</option>
+                <option value="R">Redundant</option>
+                <option value="T">Trunk</option>
+              </select>
+            </div>
+
+            <div class="input-data">
+              <input list="olt" name="olt" placeholder=" " onInput={this.handleOlt} style={{ textTransform: 'uppercase' }} required />
+              <datalist id="olt">
+                <option value="MINI"></option>
+                <option value="KLTR"></option>
+                <option value="JAWL"></option>
+                <option value="TRTL"></option>
+              </datalist>
+              <div class="underline"></div>
+              <label htmlfor="">
+                OLT<span class="text-danger">*</span>
+              </label>
+            </div>
+            {/* CORES  */}
+            <div class="input-data">
+              <label htmlfor="">
+                Cores<span class="text-danger">*</span> :
+              </label>
+              <select required onInput={this.handleCores} style={{ width: '63%' }}>
+                <option value="">Select :</option>
+                <option value="1">1</option>
+                <option value="6">6</option>
+                <option value="12">12</option>
+                <option value="24">24</option>
+                <option value="48">48</option>
+                <option value="96">96</option>
+              </select>
+            </div>
+          </div>
+
           {/* FIBER LINK NAME  */}
           <div class="form-row">
             <div class="input-data">
-              <input type="text" required placeholder=" " onInput={this.handleFiberLinkName} />
-              <div class="underline"></div>
               <label htmlfor="">
-                Fiber Link Name<span class="text-danger">*</span>
+                Fiber Link Name<span class="text-danger">* </span>: {this.LinkType}-{this.Olt}-{this.Cores}
               </label>
             </div>
           </div>
@@ -82,27 +116,10 @@ export class Form {
               <label htmlfor="">
                 Fiber Model<span class="text-danger">*</span> :
               </label>
-              <select required style={{ marginLeft: '120px', width: '63%' }} onInput={this.handleFiberModel}>
+              <select required style={{ marginLeft: '120px', width: '30%' }}>
                 <option value="">Select :</option>
                 <option value="Model 1">Model 1</option>
                 <option value="Model 2">Model 2</option>
-              </select>
-              <div class="underline"></div>
-            </div>
-
-            {/* CORES  */}
-            <div class="input-data">
-              <label htmlfor="">
-                Cores<span class="text-danger">*</span> :
-              </label>
-              <select required onInput={this.handleCores}>
-                <option value="">Select :</option>
-                <option value="6">6</option>
-                <option value="12">12</option>
-                <option value="24">24</option>
-                <option value="48">48</option>
-                <option value="96">96</option>
-                <option value="Path Cord">Path Cord</option>
               </select>
               <div class="underline"></div>
             </div>
@@ -112,12 +129,12 @@ export class Form {
           <label class="section--label">Link Location:</label>
           <div class="form-row" style={{ marginTop: '10px' }}>
             <div class="input-data">
-              <input type="text" placeholder=" " onInput={this.handleLinkLocation} name="from" />
+              <input type="text" placeholder=" " name="from" />
               <div class="underline"></div>
               <label htmlfor="">From</label>
             </div>
             <div class="input-data">
-              <input type="text" placeholder=" " onInput={this.handleLinkLocation} name="to" />
+              <input type="text" placeholder=" " name="to" />
               <div class="underline"></div>
               <label htmlfor="">To</label>
             </div>

@@ -37,6 +37,7 @@ select {
   border-radius: 0.2em;
   border: 1px solid #acacac;
   color: #181820;
+  margin-left: 80px;
   width: 75%;
 
   appearance: none;
@@ -59,7 +60,7 @@ select {
   padding: 25px 40px 10px 40px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
-  height: 30rem;
+  height: 58rem;
   overflow: auto;
 }
 
@@ -92,7 +93,6 @@ select {
   justify-content: center;
 }
 form .form-row .input-data {
-  display: flex;
   width: 100%;
   height: 40px;
   margin: 0 20px;

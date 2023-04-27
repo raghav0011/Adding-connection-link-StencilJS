@@ -6,45 +6,58 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface BambooDetail {
+    }
     interface CircuitConnection {
     }
-    interface MdComponent {
+    interface ConnectionLinkComponent {
     }
 }
 declare global {
+    interface HTMLBambooDetailElement extends Components.BambooDetail, HTMLStencilElement {
+    }
+    var HTMLBambooDetailElement: {
+        prototype: HTMLBambooDetailElement;
+        new (): HTMLBambooDetailElement;
+    };
     interface HTMLCircuitConnectionElement extends Components.CircuitConnection, HTMLStencilElement {
     }
     var HTMLCircuitConnectionElement: {
         prototype: HTMLCircuitConnectionElement;
         new (): HTMLCircuitConnectionElement;
     };
-    interface HTMLMdComponentElement extends Components.MdComponent, HTMLStencilElement {
+    interface HTMLConnectionLinkComponentElement extends Components.ConnectionLinkComponent, HTMLStencilElement {
     }
-    var HTMLMdComponentElement: {
-        prototype: HTMLMdComponentElement;
-        new (): HTMLMdComponentElement;
+    var HTMLConnectionLinkComponentElement: {
+        prototype: HTMLConnectionLinkComponentElement;
+        new (): HTMLConnectionLinkComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "bamboo-detail": HTMLBambooDetailElement;
         "circuit-connection": HTMLCircuitConnectionElement;
-        "md-component": HTMLMdComponentElement;
+        "connection-link-component": HTMLConnectionLinkComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface BambooDetail {
+    }
     interface CircuitConnection {
     }
-    interface MdComponent {
+    interface ConnectionLinkComponent {
     }
     interface IntrinsicElements {
+        "bamboo-detail": BambooDetail;
         "circuit-connection": CircuitConnection;
-        "md-component": MdComponent;
+        "connection-link-component": ConnectionLinkComponent;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "bamboo-detail": LocalJSX.BambooDetail & JSXBase.HTMLAttributes<HTMLBambooDetailElement>;
             "circuit-connection": LocalJSX.CircuitConnection & JSXBase.HTMLAttributes<HTMLCircuitConnectionElement>;
-            "md-component": LocalJSX.MdComponent & JSXBase.HTMLAttributes<HTMLMdComponentElement>;
+            "connection-link-component": LocalJSX.ConnectionLinkComponent & JSXBase.HTMLAttributes<HTMLConnectionLinkComponentElement>;
         }
     }
 }
