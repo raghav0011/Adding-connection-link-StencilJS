@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.text-button {
+  color: white;
+  border: none;
+  background-color: #0066b3;
+  width: 9rem;
+  height: 3rem;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: 'poppins';
+  position: relative;
+  margin: 100px;
+}
+
+.initial-text {
+  display: block;
+}
+
+.icon {
+  display: none;
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  top: 0;
+  left: 0;
+}
+
+.text-button:hover .initial-text {
+  display: none;
+}
+
+.text-button:hover .icon {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.8em;
+}
+
+.text-button:hover .icon1 {
+  margin-left: 18px;
+  margin-top: 7px;
+  padding: 10px;
+}
+
+.text-button:hover .icon2 {
+  padding: 10px;
+}
+
+/* To bring tooltip for Add */
+.icon1 .add {
+  visibility: hidden;
+  width: 150px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  left: 60%;
+  margin-left: -120px;
+}
+
+/* To add arrow at the bottom of the tooltip for Add */
+.icon1 .add::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+/* To bring tooltip for View */
+.icon2 .view {
+  visibility: hidden;
+  width: 150px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  left: 111%;
+  margin-left: -120px;
+}
+
+/* To add arrow at the bottom of the tooltip for View */
+.icon2 .view::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.text-button:hover .icon1:hover .add {
+  visibility: visible;
+}
+
+.text-button:hover .icon2:hover .view {
+  visibility: visible;
+}
+
+@keyframes text-animation {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon {
+  animation: text-animation 0.5s ease-in-out forwards;
+}

@@ -54,10 +54,13 @@ export class Form {
   render() {
     return (
       <div class="container">
-        <div class="text">ADD NEW CONNECTION LINK</div>
+        <div class="text">Splitter Link Add()</div>
         <form action="#" onSubmit={e => this.handleSubmit(e)}>
           {/* OLT and Link Type  */}
 
+          <label htmlfor="" style={{ fontSize: '25px', fontWeight: '50px' }}>
+            Circuit Label :
+          </label>
           <div class="form-row" style={{ marginTop: '10px', marginBottom: '10px' }}>
             <div class="input-data" style={{ marginRight: '60px' }}>
               <label htmlfor="">

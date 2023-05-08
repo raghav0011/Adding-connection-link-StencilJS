@@ -6,6 +6,10 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface AddConnectionLinkComponent {
+        "color": string;
+        "text": string;
+    }
     interface BambooDetail {
     }
     interface CircuitConnection {
@@ -14,6 +18,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLAddConnectionLinkComponentElement extends Components.AddConnectionLinkComponent, HTMLStencilElement {
+    }
+    var HTMLAddConnectionLinkComponentElement: {
+        prototype: HTMLAddConnectionLinkComponentElement;
+        new (): HTMLAddConnectionLinkComponentElement;
+    };
     interface HTMLBambooDetailElement extends Components.BambooDetail, HTMLStencilElement {
     }
     var HTMLBambooDetailElement: {
@@ -33,12 +43,17 @@ declare global {
         new (): HTMLConnectionLinkComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "add-connection-link-component": HTMLAddConnectionLinkComponentElement;
         "bamboo-detail": HTMLBambooDetailElement;
         "circuit-connection": HTMLCircuitConnectionElement;
         "connection-link-component": HTMLConnectionLinkComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface AddConnectionLinkComponent {
+        "color"?: string;
+        "text"?: string;
+    }
     interface BambooDetail {
     }
     interface CircuitConnection {
@@ -46,6 +61,7 @@ declare namespace LocalJSX {
     interface ConnectionLinkComponent {
     }
     interface IntrinsicElements {
+        "add-connection-link-component": AddConnectionLinkComponent;
         "bamboo-detail": BambooDetail;
         "circuit-connection": CircuitConnection;
         "connection-link-component": ConnectionLinkComponent;
@@ -55,6 +71,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "add-connection-link-component": LocalJSX.AddConnectionLinkComponent & JSXBase.HTMLAttributes<HTMLAddConnectionLinkComponentElement>;
             "bamboo-detail": LocalJSX.BambooDetail & JSXBase.HTMLAttributes<HTMLBambooDetailElement>;
             "circuit-connection": LocalJSX.CircuitConnection & JSXBase.HTMLAttributes<HTMLCircuitConnectionElement>;
             "connection-link-component": LocalJSX.ConnectionLinkComponent & JSXBase.HTMLAttributes<HTMLConnectionLinkComponentElement>;

@@ -171,6 +171,7 @@ form .form-row .textarea {
   overflow: hidden;
   height: 45px !important;
   width: 25% !important;
+  border-radius: 10px;
 }
 
 .btn {
@@ -207,7 +208,7 @@ form .form-row .textarea {
   width: 300%;
   position: absolute;
   left: -100%;
-  background: -webkit-linear-gradient(right, #56d8e4, #0066b3, #56d8e4, #0066b3);
+  background: #0066b3;
   transition: all 0.4s;
 }
 .submit-btn .input-data:hover .inner {
