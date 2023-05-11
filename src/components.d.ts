@@ -15,6 +15,7 @@ export namespace Components {
     interface CircuitConnection {
     }
     interface ConnectionLinkComponent {
+        "splitter_name": string;
     }
 }
 declare global {
@@ -59,6 +60,7 @@ declare namespace LocalJSX {
     interface CircuitConnection {
     }
     interface ConnectionLinkComponent {
+        "splitter_name"?: string;
     }
     interface IntrinsicElements {
         "add-connection-link-component": AddConnectionLinkComponent;

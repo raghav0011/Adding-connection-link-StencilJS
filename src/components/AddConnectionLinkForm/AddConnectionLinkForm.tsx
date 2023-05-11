@@ -1,5 +1,4 @@
-import { Component, h, State } from '@stencil/core';
-// import { addGlobalStyle, addScript } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 // const axios = require('axios').default;
 
 @Component({
@@ -8,46 +7,84 @@ import { Component, h, State } from '@stencil/core';
   shadow: true,
 })
 export class Form {
-  @State() accordionForm = [{ linkType: '', olt: '', cores: '', fiberLinkName: '', fiberModel: '', from: '', to: '', length: '', gpsStart: '', gpsEnd: '', description: '' }];
-  @State() loopwire = [{ loopName: '', loopmeter: '', GPS: '' }];
+  @Prop() splitter_name: string;
+
+  @State() accordionForm = [
+    {
+      linkType: '',
+      olt: '',
+      cores: '',
+      fiberLinkName: '',
+      fiberModel: '',
+      from: '',
+      to: '',
+      length: '',
+      gpsStart: '',
+      gpsEnd: '',
+      description: '',
+      loopWire: [
+        {
+          loopname: '',
+          loopmeter: '',
+          GPS: '',
+        },
+      ],
+    },
+  ];
 
   handleSubmit = e => {
     e.preventDefault();
   };
 
-  // LoopName
-  // addLoopwire() {
-  //   this.loopwire = [...this.loopwire, { loopName: '', loopmeter: '', GPS: '' }];
-  //   console.log(this.loopwire);
-  // }
-
-  addLoopwire() {
-    this.loopwire = [...this.loopwire, { loopName: '', loopmeter: '', GPS: '' }];
-    console.log(this.loopwire);
-  }
-
   addAccordionForm() {
     this.accordionForm = [
       ...this.accordionForm,
-      { linkType: '', olt: '', cores: '', fiberLinkName: '', fiberModel: '', from: '', to: '', length: '', gpsStart: '', gpsEnd: '', description: '' },
+      {
+        linkType: '',
+        olt: '',
+        cores: '',
+        fiberLinkName: '',
+        fiberModel: '',
+        from: '',
+        to: '',
+        length: '',
+        gpsStart: '',
+        gpsEnd: '',
+        description: '',
+        loopWire: [
+          {
+            loopname: '',
+            loopmeter: '',
+            GPS: '',
+          },
+        ],
+      },
     ];
     console.log(this.accordionForm);
-    console.log(this.loopwire);
+  }
+
+  //Adding Loopwire inside the accordion form
+  addLoopwire(i) {
+    const list = [...this.accordionForm];
+    const newLoopWire = { loopname: '', loopmeter: '', GPS: '' };
+    list[i].loopWire.push(newLoopWire);
+    this.accordionForm = list;
+    // console.log(this.accordionForm[i].loopWire);
+    console.log(this.splitter_name);
+  }
+
+  // Remove LoopName
+  removeLoopwire(i, index) {
+    const rows = [...this.accordionForm];
+    rows[i].loopWire.splice(index, 1);
+    this.accordionForm = rows;
+    console.log(this.accordionForm[i].loopWire);
   }
 
   removeAccordionForm(index) {
     const rows = [...this.accordionForm];
     rows.splice(index, 1);
     this.accordionForm = rows;
-    console.log(this.accordionForm);
-  }
-
-  // Remove LoopName
-  removeLoopwire(index) {
-    const rows = [...this.loopwire];
-    rows.splice(index, 1);
-    this.loopwire = rows;
-    // console.log(index);
   }
 
   handleAccordionFormChange(i, evnt) {
@@ -57,24 +94,24 @@ export class Form {
     this.accordionForm = list;
   }
 
-  handleLoopwireChange(index, evnt) {
+  handleLoopwireChange(i, index, evnt) {
     const { name, value } = evnt.target;
-    const list = [...this.loopwire];
-    list[index][name] = value;
-    this.loopwire = list;
+    const list = [...this.accordionForm];
+    list[i].loopWire[index][name] = value;
+    this.accordionForm = list;
   }
 
   render() {
     return (
       <div>
         <div class="container">
-          <div class="text">Splitter Link Add()</div>
+          <div class="text">Splitter Link Add({this.splitter_name})</div>
           <label htmlfor="" style={{ fontSize: '25px', fontWeight: '600' }}>
             Circuit Label :
           </label>
 
           {this.accordionForm.map((data, i) => {
-            const { linkType, olt, cores, fiberLinkName, fiberModel, from, to, length, gpsStart, gpsEnd, description } = data;
+            const { linkType, olt, cores, fiberLinkName, fiberModel, from, to, length, gpsStart, gpsEnd, description, loopWire } = data;
             return (
               <div>
                 <form action="#" onSubmit={e => this.handleSubmit(e)} key={i}>
@@ -93,17 +130,32 @@ export class Form {
                         <label htmlfor="">
                           Link Type<span class="text-danger">*</span> :
                         </label>
-                        <select required style={{ marginLeft: '100px', width: '63%' }}>
+                        <select required style={{ marginLeft: '100px', width: '63%' }} onChange={e => this.handleAccordionFormChange(i, e)} name="linkType">
                           <option value="">Select :</option>
-                          <option value="F">Fiber</option>
-                          <option value="R">Redundant</option>
-                          <option value="T">Trunk</option>
+                          <option value="F" selected={linkType === 'F'}>
+                            Fiber
+                          </option>
+                          <option value="R" selected={linkType === 'R'}>
+                            Redundant
+                          </option>
+                          <option value="T" selected={linkType === 'T'}>
+                            Trunk
+                          </option>
                         </select>
                       </div>
 
                       <div class="input-data">
-                        <input list="olt" name="olt" placeholder=" " style={{ textTransform: 'uppercase' }} required />
+                        <input
+                          list="olt"
+                          name="olt"
+                          placeholder=" "
+                          style={{ textTransform: 'uppercase' }}
+                          onChange={e => this.handleAccordionFormChange(i, e)}
+                          required
+                          value={olt}
+                        />
                         <datalist id="olt">
+                          <option value=""></option>
                           <option value="MINI"></option>
                           <option value="KLTR"></option>
                           <option value="JAWL"></option>
@@ -119,14 +171,26 @@ export class Form {
                         <label htmlfor="">
                           Cores<span class="text-danger">*</span> :
                         </label>
-                        <select required style={{ width: '63%' }}>
+                        <select required style={{ width: '63%' }} onChange={e => this.handleAccordionFormChange(i, e)} name="cores">
                           <option value="">Select :</option>
-                          <option value="1">1</option>
-                          <option value="6">6</option>
-                          <option value="12">12</option>
-                          <option value="24">24</option>
-                          <option value="48">48</option>
-                          <option value="96">96</option>
+                          <option value="1" selected={cores === '1'}>
+                            1
+                          </option>
+                          <option value="6" selected={cores === '6'}>
+                            6
+                          </option>
+                          <option value="12" selected={cores === '12'}>
+                            12
+                          </option>
+                          <option value="24" selected={cores === '24'}>
+                            24
+                          </option>
+                          <option value="48" selected={cores === '48'}>
+                            48
+                          </option>
+                          <option value="96" selected={cores === '96'}>
+                            96
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -134,9 +198,18 @@ export class Form {
                     {/* FIBER LINK NAME  */}
                     <div class="form-row">
                       <div class="input-data">
+                        <input
+                          type="text"
+                          placeholder=" "
+                          onChange={e => this.handleAccordionFormChange(i, e)}
+                          value={`${linkType}-${olt}-${cores}`}
+                          name="fiberLinkName"
+                          disabled
+                        />
                         <label htmlfor="">
                           Fiber Link Name<span class="text-danger">* </span>:
                         </label>
+                        <div class="underline"></div>
                       </div>
                     </div>
 
@@ -146,10 +219,14 @@ export class Form {
                         <label htmlfor="">
                           Fiber Model<span class="text-danger">*</span> :
                         </label>
-                        <select required style={{ marginLeft: '120px', width: '30%' }}>
+                        <select required style={{ marginLeft: '120px', width: '30%' }} onChange={e => this.handleAccordionFormChange(i, e)} name="fiberModel">
                           <option value="">Select :</option>
-                          <option value="Model 1">Model 1</option>
-                          <option value="Model 2">Model 2</option>
+                          <option value="Model 1" selected={fiberModel === 'Model 1'}>
+                            Model 1
+                          </option>
+                          <option value="Model 2" selected={fiberModel === 'Model 2'}>
+                            Model 2
+                          </option>
                         </select>
                         <div class="underline"></div>
                       </div>
@@ -211,33 +288,34 @@ export class Form {
 
                     {/* LOOP WIRE */}
                     <label class="section--label">Loop wire:</label>
-                    {this.loopwire.map((data, index) => {
-                      const { loopName, loopmeter, GPS } = data;
+                    {loopWire.map((data, index) => {
+                      const { loopname, loopmeter, GPS } = data;
                       return (
-                        <div class="form-row" style={{ marginTop: '10px' }} key={index}>
+                        // console.log(data)
+                        <div class="form-row" style={{ marginTop: '10px' }}>
                           <div class="input-data">
-                            <input type="text" onChange={evnt => this.handleLoopwireChange(index, evnt)} name="loopName" value={loopName} placeholder=" " />
+                            <input type="text" onChange={evnt => this.handleLoopwireChange(i, index, evnt)} name="loopname" value={loopname} placeholder=" " />
                             <div class="underline"></div>
                             <label htmlfor="">Loop Name</label>
                           </div>
 
                           <div class="input-data">
-                            <input type="number" onChange={evnt => this.handleLoopwireChange(index, evnt)} name="loopmeter" value={loopmeter} placeholder=" " />
+                            <input type="number" onChange={evnt => this.handleLoopwireChange(i, index, evnt)} name="loopmeter" value={loopmeter} placeholder=" " />
                             <div class="underline"></div>
                             <label htmlfor="">Loop Meters</label>
                           </div>
 
                           <div class="input-data">
-                            <input type="text" onChange={evnt => this.handleLoopwireChange(index, evnt)} name="GPS" value={GPS} placeholder=" " />
+                            <input type="text" onChange={evnt => this.handleLoopwireChange(i, index, evnt)} name="GPS" value={GPS} placeholder=" " />
                             <div class="underline"></div>
                             <label htmlfor="">GPS</label>
                           </div>
 
                           {/* ADD and REMOVE BUTTONS  */}
-                          <input class="add--btn" onClick={() => this.addLoopwire()} type="button" value="+" />
+                          <input class="add--btn" onClick={() => this.addLoopwire(i)} type="button" value="+" />
 
                           <div style={{ width: '35%' }}>
-                            {this.loopwire.length !== 1 ? <input class="remove--btn" onClick={() => this.removeLoopwire(index)} type="button" value="-" /> : ''}
+                            {loopWire.length !== 1 ? <input class="remove--btn" onClick={() => this.removeLoopwire(i, index)} type="button" value="-" /> : ''}
                           </div>
                         </div>
                       );
@@ -246,7 +324,7 @@ export class Form {
 
                   <br />
                   {this.accordionForm.length !== 1 ? (
-                    <button class="remove--btn" style={{ width: '4rem', backgroundColor: 'red' }} onClick={() => this.removeAccordionForm(i)}>
+                    <button class="remove--btn" style={{ width: '4rem', backgroundColor: 'red' }} onClick={index => this.removeAccordionForm(index)}>
                       Remove
                     </button>
                   ) : (
