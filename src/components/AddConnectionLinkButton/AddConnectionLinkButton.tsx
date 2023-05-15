@@ -1,4 +1,9 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
+
+type Modal = {
+  open: boolean;
+  show: 'add' | '';
+};
 
 @Component({
   tag: 'add-connection-link-component',
@@ -8,6 +13,21 @@ import { Component, h, Prop } from '@stencil/core';
 export class AddConnectionLink {
   @Prop() color: string;
   @Prop() text: string;
+  @State() modal: Modal = { open: false, show: '' };
+
+  close = () => {
+    this.modal = {
+      open: false,
+      show: '',
+    };
+  };
+
+  handleClickAdd = () => {
+    this.modal = {
+      open: true,
+      show: 'add',
+    };
+  };
 
   render() {
     return (
@@ -16,7 +36,7 @@ export class AddConnectionLink {
           <span class="initial-text">{this.text}</span>
           <span class="icon">
             <span class="icon1">
-              <svg height="17px" viewBox="0 0 20 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <svg height="17px" viewBox="0 0 20 14" version="1.1" xmlns="http://www.w3.org/2000/svg" onClick={this.handleClickAdd}>
                 <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g id="Rounded" transform="translate(-884.000000, -955.000000)">
                     <g id="AV" transform="translate(100.000000, 852.000000)">
@@ -44,6 +64,15 @@ export class AddConnectionLink {
             </span>
           </span>
         </button>
+
+        <div id="myModal" class="modal" style={{ display: this.modal.open ? 'block' : 'none' }}>
+          <div class="modal-content">
+            <span class="close" onClick={this.close} title="Close">
+              &times;
+            </span>
+            {this.modal.show === 'add' && <connection-link-component splitter_name="55"></connection-link-component>}
+          </div>
+        </div>
       </div>
     );
   }

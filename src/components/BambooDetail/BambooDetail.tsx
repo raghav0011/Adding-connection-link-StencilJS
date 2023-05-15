@@ -14,7 +14,6 @@ export class CitcuitConnection {
 
   handleDescriptionInput = event => {
     this.description = event.target.value;
-    console.log(this.description);
   };
 
   handleLatitudeInput = event => {

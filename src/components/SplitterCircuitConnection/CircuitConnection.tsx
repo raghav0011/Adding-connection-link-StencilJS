@@ -42,6 +42,7 @@ export class CitcuitConnection {
       show: 'view',
     };
   }
+
   @Listen('click', { target: 'window' })
   handleWindowClick(ev) {
     const modal = this.element.querySelector('div#myModal');
@@ -53,7 +54,6 @@ export class CitcuitConnection {
   // Circuit
   addCircuitConnection() {
     this.circuitConnection = [...this.circuitConnection, { LinkName: '', Core: '' }];
-    // console.log(this.circuitConnection);
   }
 
   // Remove Circuit
@@ -61,7 +61,6 @@ export class CitcuitConnection {
     const rows = [...this.circuitConnection];
     rows.splice(index, 1);
     this.circuitConnection = rows;
-    // console.log(this.circuitConnection);
   }
 
   handleCircuitConnectionChange(index, evnt) {
@@ -145,7 +144,7 @@ export class CitcuitConnection {
             <span class="close" onClick={this.close}>
               &times;
             </span>
-            {this.modal.show === 'add' && <bamboo-detail></bamboo-detail>}
+            {this.modal.show === 'add' && <connection-link-component></connection-link-component>}
             {this.modal.show === 'view' && <bamboo-detail></bamboo-detail>}
           </div>
         </div>
