@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AddConnectionLinkComponent {
         "color": string;
+        "splitter_name": string;
         "text": string;
     }
     interface BambooDetail {
@@ -53,6 +54,7 @@ declare global {
 declare namespace LocalJSX {
     interface AddConnectionLinkComponent {
         "color"?: string;
+        "splitter_name"?: string;
         "text"?: string;
     }
     interface BambooDetail {

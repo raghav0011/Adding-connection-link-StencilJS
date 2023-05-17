@@ -13,6 +13,7 @@ type Modal = {
 export class AddConnectionLink {
   @Prop() color: string;
   @Prop() text: string;
+  @Prop() splitter_name: string;
   @State() modal: Modal = { open: false, show: '' };
 
   close = () => {
@@ -70,7 +71,7 @@ export class AddConnectionLink {
             <span class="close" onClick={this.close} title="Close">
               &times;
             </span>
-            {this.modal.show === 'add' && <connection-link-component splitter_name="55"></connection-link-component>}
+            {this.modal.show === 'add' && <connection-link-component splitter_name={this.splitter_name}></connection-link-component>}
           </div>
         </div>
       </div>

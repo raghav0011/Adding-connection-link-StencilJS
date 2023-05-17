@@ -68,6 +68,7 @@ export class Form {
     const newLoopWire = { loopname: '', loopmeter: '', GPS: '' };
     list[i].loopWire.push(newLoopWire);
     this.accordionForm = list;
+    console.log(this.accordionForm);
   }
 
   // Remove LoopName

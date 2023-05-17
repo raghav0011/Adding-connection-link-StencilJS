@@ -214,11 +214,6 @@ form .form-row .textarea {
   z-index: 2;
 }
 
-.bamboo--container {
-  display: flex;
-  margin-left: 20px;
-}
-
 .container .bamboo--header {
   display: flex;
   justify-content: center;

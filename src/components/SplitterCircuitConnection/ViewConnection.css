@@ -8,30 +8,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* body {
-  overflow: overlay;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px;
-  background: linear-gradient(115deg, #56d8e4 10%, #0066b3 90%);
-} */
-
-/* :host::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-:host::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 5px;
-}
-
-:host::-webkit-scrollbar-track {
-  background-color: #f2f2f2;
-} */
-
 select {
   padding: 5px;
   border-radius: 0.2em;
@@ -59,7 +35,7 @@ select {
   padding: 25px 40px 10px 40px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
-  height: 30rem;
+  height: 50rem;
   overflow: auto;
 }
 
@@ -69,6 +45,15 @@ select {
 }
 
 .container .text {
+  text-align: center;
+  font-size: 35px;
+  font-weight: 600;
+  background: -webkit-linear-gradient(right, #0066b3, #0066b3, #0066b3, #0066b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bamboo--container .text {
   text-align: center;
   font-size: 35px;
   font-weight: 600;
@@ -90,7 +75,25 @@ select {
   margin: 32px 0;
   align-items: center;
   justify-content: center;
+  background-color: white;
+  width: 44rem;
+  margin-left: 7px;
+  border-radius: 15px;
+  height: 60px;
 }
+
+.bamboo--container form .form-row {
+  display: flex;
+  margin: 32px 0;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 44rem;
+  margin-left: 7px;
+  border-radius: 15px;
+  height: 60px;
+}
+
 form .form-row .input-data {
   display: flex;
   width: 100%;
@@ -185,33 +188,31 @@ form .form-row .textarea {
   color: white;
   border: none;
   background-color: #0066b3;
-  width: 35%;
+  width: 30%;
   height: 25px;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.bamboo--btn {
-  color: white;
-  border: none;
-  /* background-color: rgb(20, 209, 20); */
-  background-color: red;
-  width: 5rem;
-  height: 25px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 20rem;
 }
 
 .remove--btn {
   color: white;
   border: none;
   background-color: #0066b3;
-  width: 100%;
+  width: 82%;
   height: 25px;
   border-radius: 5px;
   margin-left: 5px;
   cursor: pointer;
+}
+.bamboo--btn {
+  color: white;
+  border: none;
+  background-color: red;
+  width: 5rem;
+  height: 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20rem;
 }
 
 .submit-btn .input-data .inner {
@@ -239,8 +240,16 @@ form .form-row .textarea {
 }
 
 .bamboo--container {
-  display: flex;
-  margin-left: 20px;
+  max-width: 800px;
+  background: #fff;
+  width: 800px;
+  margin: auto;
+  padding: 25px 40px 10px 40px;
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 0 0 490px rgb(0, 0, 0, 0.4);
+
+  height: 25rem;
+  overflow: auto;
 }
 
 .modal {
@@ -271,6 +280,50 @@ form .form-row .textarea {
   position: absolute;
   left: 48rem;
   cursor: pointer;
+}
+
+.container .link--list {
+  width: 45rem;
+  height: 35%;
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 20px;
+  background-color: #0066b3;
+}
+
+.container .splitter--link--connection {
+  width: 45rem;
+  height: auto;
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 20px;
+  background-color: #0066b3;
+}
+
+.container .submit-btn {
+  background: #0066b3;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 17px;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 8rem;
+  height: 40px;
+  margin-left: 40%;
+}
+
+.link--list .link--container {
+  /* border: 1px solid; */
+  height: 35px;
+  width: 10rem;
+  margin-left: 1rem;
+  background-color: white;
+  color: red;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
 }
 
 @media (max-width: 700px) {

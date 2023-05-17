@@ -12,6 +12,8 @@ export class CitcuitConnection {
   @State() longitude: string = '';
   @State() splicer: string = '';
 
+  @State() bamboo = [{ description: '', latitude: '', longitude: '', splicer: '' }];
+
   handleDescriptionInput = event => {
     this.description = event.target.value;
   };
